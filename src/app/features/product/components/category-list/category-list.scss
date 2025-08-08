@@ -1,0 +1,43 @@
+.carousel-wrapper {
+  max-width: 960px;   /* matches your content width */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.carousel-inner img {
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+/* Make carousel images nicely cropped */
+.carousel-item img {
+  object-fit: cover;
+  height: 360px;
+}
+
+/* Category circles */
+.category-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #f8f9fa;       /* light gray */
+  border: 1px solid #e9ecef;  /* subtle ring */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.5rem auto;
+  transition: transform .12s ease, background-color .12s ease;
+}
+.category-circle:hover {
+  transform: translateY(-1px);
+  background: #f1f3f5;
+}
+.category-icon {
+  font-size: 1.75rem; /* emoji/icon size */
+}
+.category-label {
+  font-weight: 600;
+  color: #495057; /* gray-700 */
+  text-transform: capitalize;
+  text-decoration: none;
+}

@@ -5,15 +5,12 @@ import { ProductDetail } from './features/product/components/product-detail/prod
 import { CategoryList } from './features/product/components/category-list/category-list';
 
 const routes: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full' },
-
-  { path: 'products', component: ProductList },          // /products
-  { path: 'products/:id', component: ProductDetail },    // /products/:id
-
-  { path: '', component: CategoryList },       // /categories
-  { path: 'categories/:name', component: ProductList },  // /categories/:name (reuse list)
-
-  { path: '**', redirectTo: '' },
+  { path: '', redirectTo: 'categories', pathMatch: 'full' },
+  { path: 'products', component: ProductList },          
+  { path: 'products/:id', component: ProductDetail },    
+  { path: 'categories', component: CategoryList },       
+  { path: 'categories/:name', component: ProductList },  
+  { path: '**', redirectTo: 'categories' },
 ];
 
 @NgModule({

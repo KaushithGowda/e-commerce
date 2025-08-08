@@ -1,0 +1,17 @@
+.navbar-light .navbar-toggler { border-color: #dee2e6; }
+.navbar-light .navbar-toggler-icon { filter: invert(40%); }
+
+/* Light navbar theme (white bg, gray text) */
+.navbar.navbar-light {
+  background-color: #ffffff;
+  border-bottom: 1px solid #eee;
+}
+.navbar.navbar-light .navbar-brand,
+.navbar.navbar-light .nav-link {
+  color: #6c757d; /* bootstrap gray-600 */
+}
+.navbar.navbar-light .nav-link.active,
+.navbar.navbar-light .nav-link:hover,
+.navbar.navbar-light .navbar-brand:hover {
+  color: #343a40; /* gray-800 */
+}

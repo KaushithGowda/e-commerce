@@ -1,1 +1,91 @@
-<p>product-list works!</p>
+<!-- Toolbar -->
+<div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mb-3">
+  <div class="flex-grow-1" style="max-width:520px">
+    <input class="form-control" type="search" placeholder="Search products by title…" [ngModel]="search()"
+      (ngModelChange)="onSearchChange($event)" />
+  </div>
+
+  <div class="d-flex align-items-center gap-2">
+    <label class="text-muted small">Per page</label>
+    <select class="form-select form-select-sm" style="width: 88px" [ngModel]="pageSize()"
+      (ngModelChange)="onPageSizeChange($event)">
+      <option>6</option>
+      <option>9</option>
+      <option>12</option>
+    </select>
+  </div>
+</div>
+
+<!-- Loading / error -->
+@if (isLoading()) {
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+  @for (i of [0,1,2,3,4,5,6,7,8]; track i) {
+  <div class="col">
+    <div class="card h-100 placeholder-glow">
+      <div class="ratio ratio-4x3 bg-light placeholder"></div>
+      <div class="card-body">
+        <div class="placeholder col-8 mb-2"></div>
+        <div class="placeholder col-4"></div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+} @else if (error()) {
+<div class="alert alert-danger d-flex justify-content-between align-items-center" role="alert">
+  <div><strong>Oops.</strong> {{ error() }}</div>
+  <a routerLink="/categories" class="btn btn-sm btn-outline-danger">Back</a>
+</div>
+} @else {
+
+<!-- Results header -->
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <div class="text-muted small">
+    {{ filtered().length }} results • page {{ page() }} / {{ totalPages() }}
+  </div>
+  @if (search().trim()) {
+  <div class="badge bg-light text-dark">Filter: “{{ search() }}”</div>
+  }
+</div>
+
+<!-- Card grid -->
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+  @for (p of paged(); track p.id) {
+  <div class="col">
+    <div class="card h-100">
+      <div class="ratio ratio-4x3">
+        <img [src]="fixImageUrl(p.image)" class="w-100 h-100 object-fit-cover" alt="{{ p.title }}" loading="lazy">
+        <!-- <img [src]="p.image" class="card-img-top object-fit-cover" alt="{{ p.title }}"> -->
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title line-clamp-2">{{ p.title }}</h5>
+        <p class="card-text text-muted small line-clamp-2">{{ p.description }}</p>
+        <div class="mt-auto d-flex justify-content-between align-items-center">
+          <span class="fw-bold">${{ p.price }}</span>
+          <a [routerLink]="['/products', p.id]" class="btn btn-sm btn-primary">View</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+
+<!-- Pagination -->
+<nav class="mt-4 d-flex justify-content-center">
+  <ul class="pagination mb-0">
+    <li class="page-item" [class.disabled]="page() === 1">
+      <button class="page-link" (click)="prev()">«</button>
+    </li>
+
+    @for (i of [].constructor(totalPages()); track i; let idx = $index) {
+    <li class="page-item" [class.active]="page() === (idx + 1)">
+      <button class="page-link" (click)="setPage(idx + 1)">{{ idx + 1 }}</button>
+    </li>
+    }
+
+    <li class="page-item" [class.disabled]="page() === totalPages()">
+      <button class="page-link" (click)="next()">»</button>
+    </li>
+  </ul>
+</nav>
+}

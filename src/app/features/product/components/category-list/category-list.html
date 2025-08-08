@@ -1,1 +1,85 @@
-<p>category-list works!</p>
+@if (isLoading()) {
+<div class="carousel-wrapper my-4">
+    <div class="placeholder-glow">
+        <div class="placeholder w-100 rounded" style="height:320px;"></div>
+    </div>
+</div>
+
+<div class="carousel-wrapper">
+    <h2 class="section-heading mt-4 mb-4">
+        <span class="heading-accent">Browse</span> Categories
+    </h2>
+
+    <div class="d-flex justify-content-center gap-4 flex-wrap">
+        <span class="placeholder rounded-circle" style="width:90px;height:90px;"></span>
+        <span class="placeholder rounded-circle" style="width:90px;height:90px;"></span>
+        <span class="placeholder rounded-circle" style="width:90px;height:90px;"></span>
+        <span class="placeholder rounded-circle" style="width:90px;height:90px;"></span>
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+        <div class="spinner-border" role="status" aria-label="Loading…"></div>
+    </div>
+</div>
+} @else if (error()) {
+<div class="carousel-wrapper">
+    <div class="alert alert-danger d-flex justify-content-between align-items-center" role="alert">
+        <div>
+            <strong>Oops.</strong> {{ error() }}
+        </div>
+    </div>
+</div>
+} @else {
+<div class="carousel-wrapper my-4">
+    <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- indicators -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2"></button>
+        </div>
+
+        <!-- slides -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://images-eu.ssl-images-amazon.com/images/G/31/img21/MA2025/GW/BAU/Unrec/PC/934044814._CB551384116_.jpg"
+                    class="d-block w-100" alt="..." />
+            </div>
+            <div class="carousel-item">
+                <img src="https://images-eu.ssl-images-amazon.com/images/G/31/img22/WLA/2025/Uber/Unrec_GW/Updated/NewUpdate_DesktopHeroTemplate_3000x1200_ref._CB550300935_.jpg"
+                    class="d-block w-100" alt="..." />
+            </div>
+            <div class="carousel-item">
+                <img src="https://images-eu.ssl-images-amazon.com/images/G/31/img23/Softlines_JWL_SH_GW_Assets/2024/BAU_BTF/Nov/Unrec/Shoes/1/30003._CB542120021_.jpg"
+                    class="d-block w-100" alt="..." />
+            </div>
+        </div>
+
+        <!-- controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="carousel-wrapper my-4">
+    <h2 class="section-heading mt-4 mb-4">
+        <span class="heading-accent">Browse</span> Categories
+    </h2>
+    <div class="row row-cols-2 row-cols-md-4 g-4">
+        @for (c of categories(); track c) {
+        <div class="col text-center">
+            <a [routerLink]="['/categories', c]" class="text-decoration-none">
+                <div class="category-circle">
+                    <span class="category-icon">{{ iconFor(c) }}</span>
+                </div>
+                <div class="category-label">{{ c }}</div>
+            </a>
+        </div>
+        }
+    </div>
+</div>
+}

@@ -1,1 +1,47 @@
-<p>product-detail works!</p>
+<!-- Top bar with Back -->
+<div class="d-flex align-items-center mb-3">
+    <a routerLink="/products" class="btn btn-outline-secondary btn-sm">← Back</a>
+</div>
+
+@if (isLoading()) {
+<!-- Simple skeleton -->
+<div class="row g-4">
+    <div class="col-12 col-md-6">
+        <div class="ratio ratio-4x3 bg-light placeholder rounded"></div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="placeholder col-7 mb-2"></div>
+        <div class="placeholder col-9 mb-2"></div>
+        <div class="placeholder col-5 mb-2"></div>
+        <div class="placeholder col-3"></div>
+    </div>
+</div>
+} @else if (error()) {
+<div class="alert alert-danger">{{ error() }}</div>
+} @else {
+@let p = product();
+
+@if (p === null) {
+<div class="text-muted">Product not found.</div>
+} @else if (p) {
+<div class="row g-4 align-items-start">
+    <!-- IMAGE (left on md+, top on mobile) -->
+
+    <div class="col-12 col-md-6 flex align-items-center justify-content-center">
+        <img [src]="p.image" alt="{{ p.title }}" class="w-100 rounded product-image">
+    </div>
+
+    <!-- DETAILS (right on md+, below on mobile) -->
+    <div class="col-12 col-md-6">
+        <h1 class="h4 mb-3">{{ p.title }}</h1>
+
+        <div class="lead fw-bold mb-3">${{ p.price }}</div>
+
+        <p class="text-muted">{{ p.description }}</p>
+
+        <!-- optional: category badge -->
+        <span class="badge text-bg-light text-capitalize">{{ p.category }}</span>
+    </div>
+</div>
+}
+}

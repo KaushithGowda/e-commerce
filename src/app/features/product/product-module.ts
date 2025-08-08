@@ -5,6 +5,8 @@ import { ProductRoutingModule } from './product-routing-module';
 import { ProductList } from './components/product-list/product-list';
 import { ProductDetail } from './components/product-detail/product-detail';
 import { CategoryList } from './components/category-list/category-list';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -15,6 +17,8 @@ import { CategoryList } from './components/category-list/category-list';
   ],
   imports: [
     CommonModule,
+    RouterModule,
+    FormsModule,
     ProductRoutingModule
   ],
 })
