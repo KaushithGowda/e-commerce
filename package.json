@@ -21,10 +21,11 @@
   "private": true,
   "dependencies": {
     "@angular/common": "^20.1.0",
-    "@angular/compiler": "^20.1.0",
+    "@angular/compiler": "^20.1.6",
     "@angular/core": "^20.1.0",
     "@angular/forms": "^20.1.0",
-    "@angular/platform-browser": "^20.1.0",
+    "@angular/platform-browser": "^20.1.6",
+    "@angular/platform-browser-dynamic": "^20.1.6",
     "@angular/router": "^20.1.0",
     "bootstrap": "^5.3.7",
     "rxjs": "~7.8.0",
